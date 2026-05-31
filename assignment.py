@@ -57,3 +57,14 @@ print("-" * 42)
 print(f"{'Decision Tree (baseline)':<30} {dt_acc*100:>9.2f}%")
 print(f"{'Random Forest (n=100)':<30} {rf_acc*100:>9.2f}%")
 print(f"{'향상폭':<30} {(rf_acc - dt_acc)*100:>+9.2f}%p")
+
+# ── 6. 파라미터 변경 실험 (n_estimators 튜닝) ──────
+print("\n=== [실험] n_estimators 파라미터 변경 실험 ===")
+print(f"{'n_estimators':<20} {'정확도':>10}")
+print("-" * 32)
+
+for n in [10, 50, 100, 200]:
+    model = RandomForestClassifier(n_estimators=n, random_state=42)
+    model.fit(X_train, y_train)
+    acc = accuracy_score(y_test, model.predict(X_test))
+    print(f"{n:<20} {acc*100:>9.2f}%")
